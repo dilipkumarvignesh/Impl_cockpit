@@ -1,12 +1,11 @@
 (function()
 {
-var app=angular.module('main',[]);
+var app=angular.module('main',['directive']);
 
-var progress=0;
-var badge=0;
+
 
 app.service('dataService',function(){
-this.progress=10;
+this.progress=20;
 this.badge=0;
 
 });
@@ -16,10 +15,18 @@ app.controller('mainController',function()
 
 });
 
-app.controller('progressController',function(dataService)
+app.controller('progressController',function($scope,dataService)
 {
+
 this.progress={};
-this.progress.status=progress;
+this.progress.status=10;
+/*$scope.apply(function(){
+$scope.progress=dataService.progress;
+});
+*/
+this.setUpdate=function(){
+this.progress.status=dataService.progress;
+};
 });
 
 app.controller('badgeController',function()
@@ -30,8 +37,8 @@ app.controller('updateController',function(dataService)
 {
 this.setUpdate=function()
 {
-progress=progress+10;
-alert(dataService.progress);
+dataService.progress+=10;
+
 };
 });
 

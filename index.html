@@ -1,0 +1,29 @@
+<html ng-app="main">
+
+<head>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css" href="css/home.css">
+<script src="lib/angular/angular.js"></script>
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</head>
+<body>
+
+<div id="score">
+<div class="progress" ng-controller="progressController as prog">
+        <div class="progress-bar" style="width: {{prog.progress.status}}%;">
+            <span class="sr-only">60% Complete</span>
+        </div>
+		
+    </div>
+	<div id="badges" ng-controller="badgeController as badge" >
+	<img width="40" height="40" ng-src="resources/badge.png" ng-repeat="item in badge.badges" >
+	</div>
+	<div id="update" ng-controller="updateController as update">
+	<button type="button" ng-click="update.setUpdate(1)">Update</button>
+	</div>
+</div>
+</body>
+</html>

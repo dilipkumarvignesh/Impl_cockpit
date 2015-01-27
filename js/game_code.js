@@ -3,6 +3,23 @@
     // once everything is loaded, we run our Three.js stuff.
     function init() {
 		var controls;
+		var loader = new THREE.ColladaLoader();
+
+  loader.options.convertUpAxis = true;
+
+  loader.load( 'resources/shuttle.dae', function ( collada ) {
+ //dummy1.dae
+
+    var dae = collada.scene;
+
+    var skin = collada.skins[ 0 ];
+
+dae.position.set(100,100,100);//x,z,y- if you think in blender dimensions ;)
+dae.scale.set(3.5,3.5,3.5);
+debugger;
+scene.add(dae);
+
+});
 		Physijs.scripts.worker = 'lib/physijs_worker.js';
 		Physijs.scripts.ammo='ammo.js';
 		var raycaster=new THREE.Raycaster();

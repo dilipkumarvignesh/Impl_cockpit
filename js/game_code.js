@@ -4,27 +4,81 @@
     function init() {
 		var controls;
 		var loader = new THREE.ColladaLoader();
+		var goblin = new THREE.ColladaLoader();
+	//	var raycaster = new THREE.Raycaster();
+		//var mouse = new THREE.Vector2();
 
-  loader.options.convertUpAxis = true;
+		var projector = new THREE.Projector(), 
+    mouse_vector = new THREE.Vector3(),
+    mouse = { x: 0, y: 0, z: 1 },
+    ray = new THREE.Raycaster( new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,0) ),
+    intersects = []; 
+		loader.options.convertUpAxis = true;
+		goblin.options.convertUpAxis = true;
+		document.addEventListener( 'click', onMouseMove, false );
+		
+		function onMouseMove(evt)
+		{
+		console.log("hi");
+		console.log(evt);
+		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1
+		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1		
+		
+    mouse_vector.set( mouse.x, mouse.y, mouse.z );
+    
+    //the final step of the transformation process, basically this method call
+    //creates a point in 3d space where the mouse click occurd
+    projector.unprojectVector( mouse_vector, camera );
+    
+    var direction = mouse_vector.sub( camera.position ).normalize();
+    
+    //ray = new THREE.Raycaster( camera.position, direction );
+    ray.set( camera.position, direction );
+	intersects = ray.intersectObjects( scene.children );
+	
+	for (var i=0;i<intersects.length;i++)
+	{
+	 if(intersects[i].object)
+	 {
+	  if(intersects[i].object.name=="change")
+	  {
+		alert("change Project selected")
+	  }
+	 }
+	}
+	}	
+		function render3d(collada)
+		{
+			var dae = collada.scene;
 
-  loader.load( 'resources/shuttle.dae', function ( collada ) {
- //dummy1.dae
+			var skin = collada.skins[ 0 ];
 
-    var dae = collada.scene;
+			dae.position.set(100,0,0);//x,z,y- if you think in blender dimensions ;)
+			dae.scale.set(8.5,8.5,8.5);
+	
+//			scene.add(dae);
 
-    var skin = collada.skins[ 0 ];
+		}
+		
+		function renderGoblin(collada)
+		{
+			var dae = collada.scene;
 
-dae.position.set(100,100,100);//x,z,y- if you think in blender dimensions ;)
-dae.scale.set(3.5,3.5,3.5);
-debugger;
-scene.add(dae);
+			var skin = collada.skins[ 0 ];
 
-});
+			//dae.position.set(camera.position.x,camera.position.y,camera.position.z-100);//x,z,y- if you think in blender dimensions ;)
+			//dae.scale.set(8.5,8.5,8.5);
+	
+		//	scene.add(dae);
+
+		}
+		loader.load( 'resources/shuttle.dae', render3d);
+		loader.load( 'resources/rover_mesh.dae', render3d);
+		goblin.load('resources/Goblin.dae',renderGoblin);
+ //du
 		Physijs.scripts.worker = 'lib/physijs_worker.js';
 		Physijs.scripts.ammo='ammo.js';
-		var raycaster=new THREE.Raycaster();
-		var mouse = new THREE.Vector2();
-        var stats = initStats();
+		var stats = initStats();
 		var ismoving=false;
 		var dir=true;
         // create a scene, that will hold all our elements such as objects, cameras and lights.
@@ -173,14 +227,16 @@ scene.add(box);
 	}
 	
 		geometry = new THREE.IcosahedronGeometry( 20, 1 );
+		
 		material = new THREE.MeshBasicMaterial( { color: 0x0000ff} );
 		mesh = new Physijs.Mesh( geometry, material );
+		mesh.name="change";
 		scene.add( mesh );
 		
 		mesh.position.y=20;
         
 		var geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
-var material = new THREE.MeshBasicMaterial( { color: 0xffff00 ,  wireframe: true} );
+			var material = new THREE.MeshBasicMaterial( { color: 0xffff00 ,  wireframe: true} );
 var torus = new THREE.Mesh( geometry, material );
 scene.add( torus );
 torus.position.x=-40;
@@ -195,7 +251,7 @@ torus.position.y=20;
         scene.add(sphere);
 
         // position and point the camera to the center of the scene
-        camera.position.x = 30;
+        camera.position.x = 0;
         camera.position.y = 20;
         camera.position.z = 100;
         camera.lookAt(scene.position);
@@ -233,16 +289,16 @@ torus.position.y=20;
 		scene.add(lensFlare);
         // add the output of the renderer to the html element
         document.getElementById("WebGL-output").appendChild(renderer.domElement);
-		document.addEventListener("keydown",kewdownhandler,false);
+		
 		document.addEventListener("onmousewheel",mouseWheel,false);
-		document.addEventListener("keyup",keyuphandler,false);
+		
         // call the render function
         var step=0;
         render1();
 		function mouseWheel(oEvent)
 		{
 		
-		debugger;
+		
 		}
         function renderScene() {
             stats.update();
@@ -280,6 +336,7 @@ torus.position.y=20;
 			mesh.rotation.x+=0.04;
 			mesh.rotation.z+=0.04;
 			
+		
 			
 		//	torus.position.y+=0.04;
 		//	torus.position.x+=0.04;
@@ -294,6 +351,8 @@ torus.position.y=20;
             requestAnimationFrame(renderScene);
             renderer.render(scene, camera);
         }
+		
+		
 		function initStats() {
 
             var stats = new Stats();
@@ -304,7 +363,7 @@ torus.position.y=20;
             stats.domElement.style.position = 'absolute';
             stats.domElement.style.left = '0px';
             stats.domElement.style.top = '0px';
-
+	debugger;
             document.getElementById("Stats-output").appendChild( stats.domElement );
 
             return stats;
@@ -362,15 +421,15 @@ webGLRenderer.render(scene, camera);
 }
 function render1()
 {	   stats.update();
-scene.simulate();
+		
 //raycaster.setFromCamera( mouse, camera );
-var intersects = raycaster.intersectObjects( scene.children );
+//var intersects = raycaster.intersectObjects( scene.children );
 
-	for ( var intersect in intersects ) {
+	/*for ( var intersect in intersects ) {
 
 		intersect.object.material.color = new THREE.Color( 0xff0000 );
 	
-	}
+	}*/
 cube.rotation.x += 0.06;
             cube.rotation.y += 0.06;
             cube.rotation.z += 0.06;
@@ -382,6 +441,9 @@ cube.rotation.x += 0.06;
 			torus.rotation.y+=0.04;
 			torus.rotation.x+=0.04;
 			torus.rotation.z+=0.04;
+			
+		
+			scene.simulate();
 	//		   step+=0.01;
       //      sphere.position.x = 2+( 30*(Math.cos(step)));
         //    sphere.position.y = 2 +( 10*Math.abs(Math.sin(step))); 
@@ -389,8 +451,8 @@ cube.rotation.x += 0.06;
 	//scene.simulate;
 
 	renderer.render(scene, camera);
-controls.update(clock.getDelta());
-requestAnimationFrame(render1);
+	controls.update(clock.getDelta());
+	requestAnimationFrame(render1);
 });	
  }  
 		

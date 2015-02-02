@@ -9,11 +9,11 @@ templateUrl:'partials/quiz.html',
 controller:function()
 {
 var quiz=this;
-debugger;
+
 $http.get('resources/quiz.json').success(function(data)
 {
-
-this.quizdata=data;
+debugger;
+quiz.quizdata=data;
 });
 }
 

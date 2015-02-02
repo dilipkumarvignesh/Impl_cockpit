@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>
+Quizzing app
+</title>
+</head>
+<body ng-App="quizApp" ng-controller="quizController">
+<script src="../lib/angular/angular.js"></script>
+<script src="../lib/angular/angular-route.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers.js"></script>
+
+<div>
+<div ng-repeat="question in questions">
+<p >{{question.questions.question}}</p>
+<ul >
+<li ng-repeat="answer in question.questions.answers">{{answer}}</li>
+
+</ul>
+</div>
+
+</div>
+

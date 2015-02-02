@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-theme.css">
 <link rel="stylesheet" type="text/css" href="css/home.css">
 <script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-route.js"></script>
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
@@ -19,31 +20,13 @@
 	<script type="text/javascript" src="lib/ColladaLoader.js"></script>
 </head>
 <body>
-<div id="WebGL-output">
-	<div id="Stats-output">
-	</div>
+<div ng-view>
 
-			<div id="score" ng-controller="progressController as prog">
-				<div class="progress" >
-					<div class="progress-bar" style="width: {{prog.progress.status}}%;">
-			
-						<span class="sr-only">60% Complete</span>
-					 </div>
-		
-				 </div>
-	
-			
-			<div id="badges" ng-controller="badgeController as badge" >
-				<img width="40" height="40" ng-src="resources/badge.png" ng-repeat="item in badge.badges" >
-			</div>
-
-			<div id="update" ng-controller="updateController as update">
-			<button type="button" ng-click="update.setUpdate(1)">Update</button>
-			<button class="block" type="button" ng-click="prog.setUpdate()">Update1</button>
-			</div>
-			</div>
-	<load-quiz ng-show="false"></load-quiz>
 
 </div>
+<!--<div class="container">
+<P>dfnakl;sdfnasdklnfaksldnfakl;sdnfasdkl;nfklasdnfkasdnfasdkn;fw</P>
+-->
+
 </body>
 </html>

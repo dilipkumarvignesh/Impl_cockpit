@@ -1,6 +1,6 @@
 (function()
 {
-var app=angular.module('main',['directive']);
+var app=angular.module('main',['directive','ngRoute']);
 
 
 
@@ -42,4 +42,16 @@ dataService.progress+=10;
 };
 });
 
+app.config(['$routeProvider',
+function($routeProvider)
+{
+$routeProvider.when('/game/',{templateUrl:'partials/game.html',
+controller:'gameCtrl'}).
+when('/quiz/',{templateUrl:'partials/quiz.html',
+controller:'quizCtrl'}).
+otherwise({
+redirectTo:'/game/'
+});
+
+}]);
 })();

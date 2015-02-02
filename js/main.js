@@ -33,6 +33,9 @@ app.controller('badgeController',function()
 {
 this.badges=['evaluate','realize','goLive','production','change'];
 });
+app.controller('orgStructController',function($scope){
+$scope.org="hello";
+});
 app.controller('updateController',function(dataService)
 {
 this.setUpdate=function()
@@ -41,7 +44,10 @@ dataService.progress+=10;
 
 };
 });
-
+app.controller('badgeController',function()
+{
+this.badges=['evaluate','realize','goLive','production','change'];
+});
 app.config(['$routeProvider',
 function($routeProvider)
 {
@@ -49,6 +55,7 @@ $routeProvider.when('/game/',{templateUrl:'partials/game.html',
 controller:'gameCtrl'}).
 when('/quiz/',{templateUrl:'partials/quiz.html',
 controller:'quizCtrl'}).
+when('/orgStruct',{templateUrl:'partials/org_struct.html',controller:'orgStruct'}).
 otherwise({
 redirectTo:'/game/'
 });

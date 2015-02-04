@@ -56,7 +56,7 @@
 			dae.position.set(100,0,0);//x,z,y- if you think in blender dimensions ;)
 			dae.scale.set(8.5,8.5,8.5);
 	
-//			scene.add(dae);
+			scene.add(dae);
 
 		}
 		
@@ -66,10 +66,10 @@
 
 			var skin = collada.skins[ 0 ];
 
-			//dae.position.set(camera.position.x,camera.position.y,camera.position.z-100);//x,z,y- if you think in blender dimensions ;)
-			//dae.scale.set(8.5,8.5,8.5);
+			dae.position.set(200,100,100);//x,z,y- if you think in blender dimensions ;)
+			dae.scale.set(8.5,8.5,8.5);
 	
-		//	scene.add(dae);
+			scene.add(dae);
 
 		}
 		loader.load( 'resources/shuttle.dae', render3d);

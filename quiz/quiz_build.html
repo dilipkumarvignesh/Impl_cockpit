@@ -3,21 +3,49 @@
 <title>
 Quizzing app
 </title>
+<style type="text/css">
+
+ul
+{
+list-style-type:none;
+}
+.container
+{
+font-size:1.4em;
+margin-left:10px;
+margin-top:10px;
+border:2px solid black;
+overflow-y:scroll;
+}
+body
+{
+background:#009de0 !important;
+}
+
+</style>
 </head>
 <body ng-App="quizApp" ng-controller="quizController">
 <script src="../lib/angular/angular.js"></script>
 <script src="../lib/angular/angular-route.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap-theme.css">
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
 
-<div>
+<div class="container">
 <div ng-repeat="question in questions">
 <p >{{question.questions.question}}</p>
 <ul >
-<li ng-repeat="answer in question.questions.answers">{{answer}}</li>
+
+<li ng-repeat="answer in question.questions.answers"><input ng-click="setAnswer()" type="radio"></input>{{answer}}
+
+</li>
 
 </ul>
+
 </div>
 
+<input type="submit" value="Submit" class="btn btn-success" ng-click="compute()"></input>
 </div>
 

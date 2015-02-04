@@ -1,0 +1,26 @@
+<div id="WebGL-output">
+	<div id="Stats-output">
+	</div>
+
+			<div id="score" ng-controller="progressController as prog">
+				<div class="progress" >
+					<div class="progress-bar" style="width: {{prog.progress.status}}%;">
+			
+						<span class="sr-only">60% Complete</span>
+					 </div>
+		
+				 </div>
+	
+			
+			<div id="badges" ng-controller="badgeController as badge" >
+				<img width="40" height="40" ng-src="resources/badge.png" ng-repeat="item in badge.badges" >
+			</div>
+
+			<div id="update" ng-controller="updateController as update">
+			<button type="button" ng-click="update.setUpdate(1)">Update</button>
+			<button class="block" type="button" ng-click="prog.setUpdate()">Update1</button>
+			</div>
+			</div>
+	<load-quiz ng-show="false"></load-quiz>
+
+</div>

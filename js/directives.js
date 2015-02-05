@@ -12,7 +12,7 @@ var quiz=this;
 
 $http.get('resources/quiz.json').success(function(data)
 {
-debugger;
+
 quiz.quizdata=data;
 });
 }

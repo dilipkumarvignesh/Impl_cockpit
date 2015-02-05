@@ -1,6 +1,8 @@
 angular.module('quizcontrollers',[]).
 controller('quizController',function($scope){
 	{
+	$scope.showResult=false;
+	$scope.answerScore=0;
 	$scope.questions=[
      {"questions":{
         "question": "Current Implementation Cockpit Supports how many Change Projects",
@@ -10,7 +12,7 @@ controller('quizController',function($scope){
                      "10",
                      "Multiple"
                 ],
-                "a": '0'
+                "a": 0
             }
 			},{
 			"questions":
@@ -22,7 +24,7 @@ controller('quizController',function($scope){
 				"ChangePhase",			
 				"EvaluatePhase"
 				],
-				"a":'2'
+				"a":2
 			}},
 			{
 			"questions":
@@ -30,11 +32,11 @@ controller('quizController',function($scope){
                 "question":"Implementation Cockpit Belongs to ",
 				"answers":[
 				"SFin",
-				"ERP",			
-				"SCrm",
-				"Logistics"
+				"SPro",			
+				"SSuite",
+				"SCrm"
 				],
-				"a":'2'
+				"a":2
 			}},{
 			"questions":
 			{
@@ -45,7 +47,7 @@ controller('quizController',function($scope){
 				"ChangePhase",			
 				"EvaluatePhase"
 				],
-				"a":'2'
+				"a":2
 			}},{
 			"questions":
 			{
@@ -56,7 +58,7 @@ controller('quizController',function($scope){
 				"ChangePhase",			
 				"EvaluatePhase"
 				],
-				"a":'2'
+				"a":2
 			}},{
 			"questions":
 			{
@@ -67,16 +69,19 @@ controller('quizController',function($scope){
 				"ChangePhase",			
 				"EvaluatePhase"
 				],
-				"a":'2'
+				"a":1
 			}}
 			];
-			$scope.setAnswer=function()
+			
+			$scope.setAnswer=function(question,answer)
 		{
-		alert("hello");
+		if($scope.questions[question].questions.a == answer)
+		$scope.answerScore++;
+		 
 		}
-		$scope.compute=function()
+		$scope.compute=function(question)
 		{
-		alert("hello");
+		$scope.showResult=true;
 		}
 	
 	}

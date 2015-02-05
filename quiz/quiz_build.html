@@ -15,11 +15,14 @@ font-size:1.4em;
 margin-left:10px;
 margin-top:10px;
 border:2px solid black;
-overflow-y:scroll;
+
 }
 body
 {
 background:#009de0 !important;
+}
+#no{
+display:inline;
 }
 
 </style>
@@ -31,14 +34,16 @@ background:#009de0 !important;
 <script src="js/controllers.js"></script>
 <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap-theme.css">
+<script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
 
 <div class="container">
 <div ng-repeat="question in questions">
-<p >{{question.questions.question}}</p>
+<span >{{$index+1}}.</span>
+<p id="no">{{question.questions.question}}</p>
 <ul >
 
-<li ng-repeat="answer in question.questions.answers"><input ng-click="setAnswer()" type="radio"></input>{{answer}}
+<li ng-repeat="answer in question.questions.answers"><input ng-click="setAnswer($parent.$index,$index)" type="radio"></input>{{answer}}
 
 </li>
 
@@ -47,5 +52,8 @@ background:#009de0 !important;
 </div>
 
 <input type="submit" value="Submit" class="btn btn-success" ng-click="compute()"></input>
+
 </div>
 
+<div ng-show="showResult"class="alert alert-success" data-dismiss="alert" role="alert">You scored {{answerScore}}</div>
+</body>

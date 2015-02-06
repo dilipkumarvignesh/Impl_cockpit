@@ -48,9 +48,15 @@ app.controller('badgeController',function()
 {
 this.badges=['evaluate','realize','goLive','production','change'];
 });
+
+app.controller('gameCtrl',function()
+{
+this.badges=['evaluate','realize','goLive','production','change'];
+});
 app.config(['$routeProvider',
 function($routeProvider)
 {
+debugger;
 $routeProvider.when('/game/',{templateUrl:'partials/game.html',
 controller:'gameCtrl'}).
 when('/quiz/',{templateUrl:'partials/quiz.html',

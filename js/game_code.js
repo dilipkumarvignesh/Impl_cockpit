@@ -190,7 +190,7 @@ function init() {
 
    
 
-    geometry = new THREE.IcosahedronGeometry(20, 1);
+    geometry = new THREE.IcosahedronGeometry(13, 1);
 
     material = new THREE.MeshBasicMaterial({
         color: 0x0000ff

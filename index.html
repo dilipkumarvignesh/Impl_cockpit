@@ -21,7 +21,16 @@
 	<script type="text/javascript" src="lib/ColladaLoader.js"></script>
 </head>
 <body>
+<div id="score" ng-controller="progressController as prog">
+				<div class="progress" >
+					<div class="progress-bar" style="width: {{prog.progress.status}}%;">
+			
+						<span class="sr-only">60% Complete</span>
+					 </div>
+		
+				 </div>
 
+<div ng-view></div>
 
 <div id="WebGL-output">
 	<div id="Stats-output">

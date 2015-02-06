@@ -16,19 +16,13 @@
 	<script type="text/javascript" src="lib/physi.js"></script>
 	<script type="text/javascript" src="lib/controls/TrackBallControls.js"></script>
 	<script type="text/javascript" src="lib/controls/FirstPersonControls.js"></script>
+	<script type="text/javascript" src="lib/controls/PointerLockControls.js"></script>
 	<script type="text/javascript" src="js/game_code.js"></script>
 	<script type="text/javascript" src="js/directives.js"></script>
 	<script type="text/javascript" src="lib/ColladaLoader.js"></script>
 </head>
 <body>
-<div id="score" ng-controller="progressController as prog">
-				<div class="progress" >
-					<div class="progress-bar" style="width: {{prog.progress.status}}%;">
-			
-						<span class="sr-only">60% Complete</span>
-					 </div>
-		
-				 </div>
+
 
 <div ng-view></div>
 
@@ -47,7 +41,9 @@
 	
 			
 			<div id="badges" ng-controller="badgeController as badge" >
-				<img width="40" height="40" ng-src="resources/badge.png" ng-repeat="item in badge.badges" >
+				<button class="btn btn-primary" type="button">
+				Badges <span class="badge">{{BadgesWon}}</span>
+				</button>
 			</div>
 
 			<div id="update" ng-controller="updateController as update">
@@ -55,7 +51,7 @@
 			<button class="block" type="button" ng-click="prog.setUpdate()">Update1</button>
 			</div>
 			</div>
-	<load-quiz ng-show="false"></load-quiz>
+	
 
 
 </div>
